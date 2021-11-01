@@ -35,9 +35,9 @@ def get_may_refer_to_list(soup: BeautifulSoup) -> str:
     return '\n'.join([item.text for item in list_items])
 
 def get_summary(soup: BeautifulSoup) -> str:
-    p_list = soup.find_all('p', limit=5)
+    p_list = soup.find('div', {'class': 'mw-parser-output'}).find_all('p', limit=5, recursive=False)
     summary = 'Could not find summary'
-    
+
     for p in p_list:
         if len(p.text) > 5:
             summary = p.text
