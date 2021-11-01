@@ -27,14 +27,14 @@ class bcolors:
 def remove_reference_numbers(text: str) -> str:
     return re.sub(r'\[\d+\]', '', text)
 
-def get_title(soup) -> str:
+def get_title(soup: BeautifulSoup) -> str:
     return soup.find('h1', {'id': 'firstHeading'}).text
 
-def get_may_refer_to_list(soup):
+def get_may_refer_to_list(soup: BeautifulSoup) -> str:
     list_items = soup.find('div', {'class': 'mw-parser-output'}).find_all('li', class_=None)
     return '\n'.join([item.text for item in list_items])
 
-def get_summary(soup) -> str:
+def get_summary(soup: BeautifulSoup) -> str:
     p_list = soup.find_all('p', limit=5)
     summary = 'Could not find summary'
     
