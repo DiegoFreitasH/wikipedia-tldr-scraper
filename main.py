@@ -65,10 +65,12 @@ def render_summmay(title: str, link: str, summary_text: str) -> None:
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Scrape summary paragraph from wikipedia')
     parser.add_argument('search', nargs='+')
+    parser.add_argument('--lang', choices=['en', 'pt'], default='en')
 
     args = parser.parse_args()
     
-    prefix = 'https://en.wikipedia.org/wiki/'
+    source_lang = args.lang
+    prefix = f'https://{source_lang}.wikipedia.org/wiki/'
     query = "_".join(args.search)
     
     processed_query = '_'.join(query.split())
